@@ -2,6 +2,8 @@ package com.trade.resource;
 
 import java.util.List;
 
+import javax.ws.rs.QueryParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,6 @@ import com.trade.api.ParentBankNiftyFuture;
 import com.trade.service.BankNiftyService;
 import com.trade.service.StockService;
 import com.trade.service.TradeService;
-import javax.ws.rs.QueryParam;
 
 @Controller
 @RequestMapping("/trading")
