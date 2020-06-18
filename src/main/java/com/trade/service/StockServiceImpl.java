@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.trade.api.DataPoints;
 import com.trade.api.ResSupport;
+import com.trade.api.TradeSymbol;
 import com.trade.api.Utils;
 
 @Service
@@ -23,12 +24,12 @@ public class StockServiceImpl implements StockService{
 	private String url="https://www.investing.com/equities/";
 	
 	@Override
-	public DataPoints getStockSupportResistance(String stockName) {
+	public DataPoints getStockSupportResistance(TradeSymbol tradeSymbol) {
 		Document doc = null;
 		DataPoints dataPoints=new DataPoints();
 		HashMap<String,Float> map=new HashMap<String,Float>();
 		try {
-			url=url+stockName;
+			url=url+tradeSymbol.getByCode()+"-technical";
 			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(10*1000000).get();
 				Element ltdElement = doc.getElementById("last_last");
 				String ltp=ltdElement.html();
@@ -106,8 +107,8 @@ public class StockServiceImpl implements StockService{
 					 dataPoints.setLtpDataPointcordinate(key);
 					 //System.out.println("sorted" + sortedMap);
 				}
-				dataPoints.setSymbol(stockName);
-				stockName="";
+				dataPoints.setSymbol(tradeSymbol.getByCode());
+			
 			return dataPoints;
 		} catch (IOException e) {
 			e.printStackTrace();

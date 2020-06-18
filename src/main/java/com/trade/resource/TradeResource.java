@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trade.api.DataPoints;
 import com.trade.api.ParentBankNiftyFuture;
+import com.trade.api.TradeSymbol;
 import com.trade.service.BankNiftyService;
 import com.trade.service.StockService;
 import com.trade.service.TradeService;
@@ -53,9 +54,9 @@ public class TradeResource {
 	
 	@GetMapping("/stock/ressup")
 	@ResponseBody
-	public DataPoints getResistanceAndSupport(@QueryParam("stockName") String stockName)
+	public DataPoints getResistanceAndSupport(@QueryParam("tradeSymbol") TradeSymbol tradeSymbol)
 	{		
-		return stockService.getStockSupportResistance(stockName);
+		return stockService.getStockSupportResistance(tradeSymbol);
 	}
 	
 	
