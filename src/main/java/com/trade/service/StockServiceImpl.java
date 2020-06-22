@@ -21,7 +21,7 @@ import com.trade.api.Utils;
 @Service
 public class StockServiceImpl implements StockService{
 
-	private String url="https://www.investing.com/equities/";
+	
 	
 	@Override
 	public DataPoints getStockSupportResistance(TradeSymbol tradeSymbol) {
@@ -29,9 +29,11 @@ public class StockServiceImpl implements StockService{
 		DataPoints dataPoints=new DataPoints();
 		HashMap<String,Float> map=new HashMap<String,Float>();
 		try {
+			String url="https://www.investing.com/equities/";
 			url=url+tradeSymbol.getByCode()+"-technical";
 			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(10*1000000).get();
-				Element ltdElement = doc.getElementById("last_last");
+			url="";	
+			Element ltdElement = doc.getElementById("last_last");
 				String ltp=ltdElement.html();
 				ltp=ltp.replaceAll(",", "");
 				Float ltp_float=Float.parseFloat(ltp);
@@ -108,7 +110,7 @@ public class StockServiceImpl implements StockService{
 					 //System.out.println("sorted" + sortedMap);
 				}
 				dataPoints.setSymbol(tradeSymbol.getByCode());
-				url="";
+				
 			return dataPoints;
 		} catch (IOException e) {
 			e.printStackTrace();
