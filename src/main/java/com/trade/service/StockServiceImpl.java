@@ -108,7 +108,7 @@ public class StockServiceImpl implements StockService{
 					 //System.out.println("sorted" + sortedMap);
 				}
 				dataPoints.setSymbol(tradeSymbol.getByCode());
-			
+				url="";
 			return dataPoints;
 		} catch (IOException e) {
 			e.printStackTrace();
