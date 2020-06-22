@@ -2,7 +2,7 @@ package com.trade.api;
 
 public enum TradeSymbol {
 
-	TCS("tata-consultancy-services-technical"),
+	TCS("tata-consultancy-services"),
 	MARUTI("maruti-suzuki-india"),
 	BHARTIARTL("bharti-airtel"),
 	WIPRO("wipro-ltd"),
