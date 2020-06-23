@@ -203,7 +203,7 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public ParentMostActiveCallPutAll getPutOptions() {
 		String path="https://www1.nseindia.com/live_market/dynaContent/live_analysis/most_active/PutsALLVolume.json";
-		String result=restTemplateIssueResolver.CommonHttpDataFetcher(path);
+		String result=restTemplateIssueResolver.commonHttpConnectionDataFetcher(path);
 		ParentMostActiveCallPutAll parentMostActiveCallPutAll=new Gson().fromJson(result.toString(),ParentMostActiveCallPutAll.class);
 		
 		return parentMostActiveCallPutAll;
