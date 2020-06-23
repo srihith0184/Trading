@@ -2,6 +2,7 @@ package com.trade.service;
 
 import java.util.List;
 
+import com.trade.api.ParentMostActiveCallPutAll;
 import com.trade.api.DataPoints;
 import com.trade.api.ParentBankNiftyFuture;
 
@@ -12,4 +13,6 @@ public interface TradeService {
 	public String testNSE();
 	
 	public DataPoints getNiftyAndBankNiftySupportResistance(String url);
+	
+	public ParentMostActiveCallPutAll getCallOptions();
 }

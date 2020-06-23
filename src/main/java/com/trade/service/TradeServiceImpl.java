@@ -11,16 +11,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.trade.api.DataPoints;
 import com.trade.api.ParentBankNiftyFuture;
+import com.trade.api.ParentMostActiveCallPutAll;
 import com.trade.api.ResSupport;
 import com.trade.api.Utils;
+import com.trade.provider.RestTemplateIssueResolver;
 
 @Service
 public class TradeServiceImpl implements TradeService {
+	
+
+	@Autowired
+	RestTemplateIssueResolver restTemplateIssueResolver;
 
 	@Override
 	public List<String> getNSEData() {
@@ -181,6 +188,16 @@ public class TradeServiceImpl implements TradeService {
 			jsonCont= content.html();
 			return jsonCont;
 		}catch(Exception e) {return null;}
+	}
+
+	@Override
+	public ParentMostActiveCallPutAll getCallOptions() {
+		String path="https://www1.nseindia.com/live_market/dynaContent/live_analysis/most_active/CallsNIFTYVolume.json";
+		String result=restTemplateIssueResolver.CommonHttpDataFetcher(path);
+		ParentMostActiveCallPutAll parentMostActiveCallPutAll=new Gson().fromJson(result.toString(),ParentMostActiveCallPutAll.class);
+		
+		return parentMostActiveCallPutAll;
+
 	}
 
 

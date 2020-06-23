@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.trade.api.ParentMostActiveCallPutAll;
 import com.trade.api.DataPoints;
 import com.trade.api.ParentBankNiftyFuture;
 import com.trade.api.TradeSymbol;
@@ -43,6 +44,13 @@ public class TradeResource {
 	{
 		String nifty = "https://www.investing.com/indices/s-p-cnx-nifty-technical";
 		return tradeService.getNiftyAndBankNiftySupportResistance(nifty);
+	}
+	
+	@GetMapping("/nifty/calls")
+	@ResponseBody
+	public ParentMostActiveCallPutAll getCallOptionData()
+	{
+		return tradeService.getCallOptions();
 	}
 	
 	@GetMapping("/banknifty/options")
