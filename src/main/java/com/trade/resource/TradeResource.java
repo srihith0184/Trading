@@ -57,7 +57,7 @@ public class TradeResource {
 	@ResponseBody
 	public ParentMostActiveCallPutAll getPutOptionData()
 	{
-		return tradeService.getCallOptions();
+		return tradeService.getPutOptions();
 	}
 	
 	@GetMapping("/banknifty/options")
