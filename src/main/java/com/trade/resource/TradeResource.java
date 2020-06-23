@@ -53,6 +53,13 @@ public class TradeResource {
 		return tradeService.getCallOptions();
 	}
 	
+	@GetMapping("/nifty/puts")
+	@ResponseBody
+	public ParentMostActiveCallPutAll getPutOptionData()
+	{
+		return tradeService.getCallOptions();
+	}
+	
 	@GetMapping("/banknifty/options")
 	@ResponseBody
 	public DataPoints getTradeBankNiftyOptionData()

@@ -15,4 +15,6 @@ public interface TradeService {
 	public DataPoints getNiftyAndBankNiftySupportResistance(String url);
 	
 	public ParentMostActiveCallPutAll getCallOptions();
+	
+	public ParentMostActiveCallPutAll getPutOptions();
 }
