@@ -71,6 +71,7 @@ public class TradeServiceImpl implements TradeService {
                            .header("Accept-Encoding", "gzip,deflate")
                            .header("Accept-Language", "it-IT,en;q=0.8,en-US;q=0.6,de;q=0.4,it;q=0.2,es;q=0.2")
                            .header("Connection", "keep-alive")
+                           .timeout(10*10000)
                            .ignoreContentType(true)
                            .get();
 				Element content = doc.getElementById("responseDiv");
