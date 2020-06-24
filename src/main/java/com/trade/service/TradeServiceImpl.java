@@ -65,7 +65,8 @@ public class TradeServiceImpl implements TradeService {
 					+ expiryMonth;
 			Document doc = null;
 			try {
-				doc = Jsoup.connect(url).userAgent("Mozilla/5.0").get();
+				doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36")
+						.get();
 				Element content = doc.getElementById("responseDiv");
 				String jsonCont = content.html();
 				// System.out.println(jsonCont);
