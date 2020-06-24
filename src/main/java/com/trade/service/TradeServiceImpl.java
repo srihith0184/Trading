@@ -65,7 +65,7 @@ public class TradeServiceImpl implements TradeService {
 					+ expiryMonth;
 			Document doc = null;
 			try {
-				doc = Jsoup.connect(url.replaceAll("", "%20"))
+				doc = Jsoup.connect(url.replaceAll(" ", "%20"))
 						   .userAgent("Mozilla")
                            .header("Accept", "text/html")
                            .header("Accept-Encoding", "gzip,deflate")
