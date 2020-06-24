@@ -66,7 +66,7 @@ public class TradeServiceImpl implements TradeService {
 			Document doc = null;
 			try {
 				doc = Jsoup.connect(url.replaceAll(" ", "%20"))
-						   .userAgent("Mozilla")
+						   .userAgent("Chrome Browser")
                            .header("Accept", "text/html")
                            .header("Accept-Encoding", "gzip,deflate")
                            .header("Accept-Language", "it-IT,en;q=0.8,en-US;q=0.6,de;q=0.4,it;q=0.2,es;q=0.2")
