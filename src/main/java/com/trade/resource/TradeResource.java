@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trade.api.DataPoints;
-import com.trade.api.ParentBankNiftyFuture;
 import com.trade.api.ParentMostActiveCallPutAll;
 import com.trade.api.TradeSymbol;
 import com.trade.service.BankNiftyService;
@@ -35,9 +34,9 @@ public class TradeResource {
 	
 	@GetMapping("/nifty/dates")
 	@ResponseBody
-	public List<ParentBankNiftyFuture> getTradeData()
+	public List<String> getTradeData()
 	{
-		return tradeService.getNiftyFutureOIReader();
+		return tradeService.getNSEData();
 	}
 
 	@GetMapping("/nifty/options")

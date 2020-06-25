@@ -28,7 +28,7 @@ public class RestTemplateIssueResolver {
 					ignoreContentType(true)
 					.userAgent("Mozilla/5.0")
 					.referrer("https://www1.nseindia.com")
-					.timeout(15_000)
+					.timeout(15000)
 					.followRedirects(true)
 					.execute();
 			// TODO: verify Response status code here!
@@ -68,7 +68,7 @@ public class RestTemplateIssueResolver {
 			connection.setRequestProperty("Host", "www1.nseindia.com");
 			connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 			connection.setRequestProperty("Connection", "Keep-Alive");
-			
+			System.setProperty("http.agent", "");
 
 			// uncomment this if you want to write output to this url
 			// connection.setDoOutput(true);
