@@ -18,7 +18,7 @@ import com.trade.service.BankNiftyService;
 import com.trade.service.StockService;
 import com.trade.service.TradeService;
 
-@CrossOrigin(origins = "https://www1.nseindia.com", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/trading")
 public class TradeResource {
