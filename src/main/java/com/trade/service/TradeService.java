@@ -8,7 +8,7 @@ import com.trade.api.ParentBankNiftyFuture;
 
 public interface TradeService {
 	
-	public List<String> getNSEData();
+	public String getNSEData();
 	public List<ParentBankNiftyFuture> getNiftyFutureOIReader();
 	public String testNSE();
 	

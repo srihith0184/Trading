@@ -1,11 +1,16 @@
 package com.trade.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,63 +35,84 @@ public class TradeServiceImpl implements TradeService {
 	RestTemplateIssueResolver restTemplateIssueResolver;
 
 	@Override
-	public List<String> getNSEData() {
-		String url = "https://www1.nseindia.com/live_market/dynaContent/live_watch/option_chain/optionKeys.jsp?symbolCode=-10006&symbol=NIFTY&symbol=NIFTY&instrument=-&date=-&segmentLink=17&symbolCount=2&segmentLink=17";
-		Document doc = null;
+	public String getNSEData() {
+//		String url = "https://www1.nseindia.com/live_market/dynaContent/live_watch/option_chain/optionKeys.jsp?symbolCode=-10006&symbol=NIFTY&symbol=NIFTY&instrument=-&date=-&segmentLink=17&symbolCount=2&segmentLink=17";
+//		Document doc = null;
+//		try {
+//			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(15 * 1000).get();
+//			Elements content = doc.getElementsByClass("goodTextBox");
+//			if (content != null && content.size() > 1) {
+//				List<String> list = content.eachText();
+//				String value = list.get(1).replaceAll("Select", "").trim();
+//				// System.out.println(value);
+//				String[] values = value.split("\\s+");
+//				return Arrays.asList(values);
+//			} else {
+//				List<String> list = new ArrayList<String>();
+//				list.add("Error While Loading...");
+//				return list;
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			List<String> list = new ArrayList<String>();
+//			list.add("Read time out while Loading...");
+//			return list;
+//		}
+		
+		StringBuffer sb=new StringBuffer();
 		try {
-			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(15 * 1000).get();
-			Elements content = doc.getElementsByClass("goodTextBox");
-			if (content != null && content.size() > 1) {
-				List<String> list = content.eachText();
-				String value = list.get(1).replaceAll("Select", "").trim();
-				// System.out.println(value);
-				String[] values = value.split("\\s+");
-				return Arrays.asList(values);
-			} else {
-				List<String> list = new ArrayList<String>();
-				list.add("Error While Loading...");
-				return list;
-			}
+		String httpsURL = "https://www1.nseindia.com/live_market/dynaContent/live_watch/option_chain/optionKeys.jsp?symbolCode=-10006&symbol=NIFTY&symbol=NIFTY&instrument=-&date=-&segmentLink=17&symbolCount=2&segmentLink=17";
+        URL myUrl = new URL(httpsURL);
+        HttpsURLConnection conn = (HttpsURLConnection)myUrl.openConnection();
+        InputStream is = conn.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			List<String> list = new ArrayList<String>();
-			list.add("Read time out while Loading...");
-			return list;
-		}
+        
+        String inputLine;
+
+        while ((inputLine = br.readLine()) != null) {
+            sb.append(inputLine);
+        }
+
+        br.close();
+		}catch(Exception e) {}
+		return sb.toString();
 	}
 
 	@Override
 	public List<ParentBankNiftyFuture> getNiftyFutureOIReader() {
-		List<ParentBankNiftyFuture> parentBankNiftyFutureList = new ArrayList<>();
-		List<String> expiryMonthList = getNSEData();
-		for (String expiryMonth : expiryMonthList) {
-			String url = "https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuoteFO.jsp?underlying=NIFTY&instrument=FUTIDX&type=-&strike=-&expiry="
-					+ expiryMonth;
-			Document doc = null;
-			try {
-				doc = Jsoup.connect(url.replaceAll(" ", "%20"))
-						   .userAgent("Chrome Browser")
-                           .header("Accept", "text/html")
-                           .header("Accept-Encoding", "gzip,deflate")
-                           .header("Accept-Language", "it-IT,en;q=0.8,en-US;q=0.6,de;q=0.4,it;q=0.2,es;q=0.2")
-                           .header("Connection", "keep-alive")
-                           .timeout(10*10000)
-                           .ignoreContentType(true)
-                           .get();
-				Element content = doc.getElementById("responseDiv");
-				String jsonCont = content.html();
-				// System.out.println(jsonCont);
-				ParentBankNiftyFuture parentBankNiftyFuture = new Gson().fromJson(jsonCont,
-						ParentBankNiftyFuture.class);
-				parentBankNiftyFutureList.add(parentBankNiftyFuture);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-		return parentBankNiftyFutureList;
+		return null;
+//		List<ParentBankNiftyFuture> parentBankNiftyFutureList = new ArrayList<>();
+//		List<String> expiryMonthList = getNSEData();
+//		for (String expiryMonth : expiryMonthList) {
+//			String url = "https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuoteFO.jsp?underlying=NIFTY&instrument=FUTIDX&type=-&strike=-&expiry="
+//					+ expiryMonth;
+//			Document doc = null;
+//			try {
+//				doc = Jsoup.connect(url.replaceAll(" ", "%20"))
+//						   .userAgent("Chrome Browser")
+//                           .header("Accept", "text/html")
+//                           .header("Accept-Encoding", "gzip,deflate")
+//                           .header("Accept-Language", "it-IT,en;q=0.8,en-US;q=0.6,de;q=0.4,it;q=0.2,es;q=0.2")
+//                           .header("Connection", "keep-alive")
+//                           .timeout(10*10000)
+//                           .ignoreContentType(true)
+//                           .get();
+//				Element content = doc.getElementById("responseDiv");
+//				String jsonCont = content.html();
+//				// System.out.println(jsonCont);
+//				ParentBankNiftyFuture parentBankNiftyFuture = new Gson().fromJson(jsonCont,
+//						ParentBankNiftyFuture.class);
+//				parentBankNiftyFutureList.add(parentBankNiftyFuture);
+//
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				return null;
+//			}
+//		}
+//		return parentBankNiftyFutureList;
 
 	}
 	

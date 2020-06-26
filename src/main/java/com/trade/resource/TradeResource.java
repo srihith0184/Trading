@@ -34,7 +34,7 @@ public class TradeResource {
 	
 	@GetMapping("/nifty/dates")
 	@ResponseBody
-	public List<String> getTradeData()
+	public String getTradeData()
 	{
 		return tradeService.getNSEData();
 	}
