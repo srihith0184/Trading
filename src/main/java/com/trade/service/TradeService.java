@@ -1,5 +1,8 @@
 package com.trade.service;
 
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.trade.api.ParentMostActiveCallPutAll;
@@ -16,5 +19,5 @@ public interface TradeService {
 	
 	public ParentMostActiveCallPutAll getCallOptions();
 	
-	public ParentMostActiveCallPutAll getPutOptions();
+	public ParentMostActiveCallPutAll getPutOptions() throws KeyManagementException, KeyStoreException, NoSuchAlgorithmException;
 }

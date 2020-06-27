@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -53,12 +55,12 @@ public class RestTemplateIssueResolver {
 
 		URL url = null;
 		BufferedReader reader = null;
-		HttpURLConnection connection=null;
+		HttpsURLConnection connection=null;
 		String line = null;
 		try {
 			// create the HttpURLConnection
 			url = new URL(desiredUrl);
-			 connection = (HttpURLConnection) url.openConnection();
+			 connection = (HttpsURLConnection) url.openConnection();
 
 
 			// just want to do an HTTP GET here

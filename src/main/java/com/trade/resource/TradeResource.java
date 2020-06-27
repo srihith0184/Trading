@@ -1,5 +1,8 @@
 package com.trade.resource;
 
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.ws.rs.QueryParam;
@@ -56,13 +59,12 @@ public class TradeResource {
 	
 	@GetMapping("/nifty/puts")
 	@ResponseBody
-	public ParentMostActiveCallPutAll getPutOptionData()
+	public ParentMostActiveCallPutAll getPutOptionData() throws KeyManagementException, KeyStoreException, NoSuchAlgorithmException
 	{
 		return tradeService.getPutOptions();
 	}
 	
 	@GetMapping("/banknifty/options")
-	@ResponseBody
 	public DataPoints getTradeBankNiftyOptionData()
 	{		
 		return bankNiftyService.getBankNiftySupportResistance();
