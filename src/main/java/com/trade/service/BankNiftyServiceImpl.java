@@ -27,7 +27,7 @@ public class BankNiftyServiceImpl  implements BankNiftyService{
 		DataPoints dataPoints=new DataPoints();
 		HashMap<String,Float> map=new HashMap<String,Float>();
 		try {
-			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(10*1000).get();
+			doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(30*1000).get();
 				Element ltdElement = doc.getElementById("last_last");
 				String ltp=ltdElement.html();
 				ltp=ltp.replaceAll(",", "");
