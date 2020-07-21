@@ -1,9 +1,5 @@
 package com.trade.resource;
 
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-
 import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trade.api.DataPoints;
-import com.trade.api.ParentMostActiveCallPutAll;
+import com.trade.api.StockDetails;
 import com.trade.api.TradeSymbol;
 import com.trade.service.BankNiftyService;
 import com.trade.service.StockService;
@@ -63,6 +59,12 @@ public class TradeResource {
 		return stockService.getStockSupportResistance(tradeSymbol);
 	}
 	
+	@GetMapping("/topgainers")
+	@ResponseBody
+	public StockDetails getTopGainers()
+	{		
+		return stockService.getTopGainers();
+	}
 	
 	
 }

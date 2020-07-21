@@ -12,9 +12,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.trade.api.DataPoints;
 import com.trade.api.ResSupport;
+import com.trade.api.StockDetails;
 import com.trade.api.TradeSymbol;
 import com.trade.api.Utils;
 
@@ -116,6 +118,17 @@ public class StockServiceImpl implements StockService{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public StockDetails getTopGainers() {
+		
+		String uri = "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json";
+
+		RestTemplate restTemplate = new RestTemplate();
+		StockDetails stockDetails = restTemplate.getForObject(uri, StockDetails.class);
+
+		return stockDetails;
 	}
 
 }
