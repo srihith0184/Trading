@@ -11,6 +11,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -125,10 +126,23 @@ public class StockServiceImpl implements StockService{
 		
 		String uri = "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json";
 
-		RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
 		StockDetails stockDetails = restTemplate.getForObject(uri, StockDetails.class);
 
 		return stockDetails;
+	}
+	
+	//Override timeouts in request factory
+	private SimpleClientHttpRequestFactory getClientHttpRequestFactory() 
+	{
+	    SimpleClientHttpRequestFactory clientHttpRequestFactory
+	                      = new SimpleClientHttpRequestFactory();
+	    //Connect timeout
+	    clientHttpRequestFactory.setConnectTimeout(10_000);
+	     
+	    //Read timeout
+	    clientHttpRequestFactory.setReadTimeout(10_000);
+	    return clientHttpRequestFactory;
 	}
 
 }
