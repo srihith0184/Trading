@@ -1,5 +1,7 @@
 package com.trade.resource;
 
+import java.io.IOException;
+
 import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trade.api.DataPoints;
-import com.trade.api.StockDetails;
+import com.trade.api.StockSuggestData;
 import com.trade.api.TradeSymbol;
 import com.trade.service.BankNiftyService;
 import com.trade.service.StockService;
@@ -28,6 +30,8 @@ public class TradeResource {
 	
 	@Autowired
 	private StockService stockService;
+	
+	static final int TIMEOUT = 5000;
 	
 	@GetMapping("/nifty/dates")
 	@ResponseBody
@@ -61,10 +65,12 @@ public class TradeResource {
 	
 	@GetMapping("/topgainers")
 	@ResponseBody
-	public StockDetails getTopGainers()
+	public StockSuggestData getTradingSuggestions() throws IOException
 	{		
-		return stockService.getTopGainers();
+		return stockService.getTradeSuggestions();
 	}
+	
+	
 	
 	
 }
